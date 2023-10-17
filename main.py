@@ -15,13 +15,13 @@ print("Model Loaded Successfully")
 
 
 def pred_cotton(cotton):
-    test_image = load_img(cotton, target_size=(224, 224))  # load image
+    test_image = load_img(cotton, target_size=(224, 224))
     print("@@ Got Image for prediction")
 
-    test_image = img_to_array(test_image) / 255  # convert image to np array and normalize
-    test_image = np.expand_dims(test_image, axis=0)  # change dimention 3D to 4D
+    test_image = img_to_array(test_image) / 255
+    test_image = np.expand_dims(test_image, axis=0)
 
-    result = model.predict(test_image)  # predict diseased palnt or not
+    result = model.predict(test_image)
     print('@@ Raw result = ', result)
 
     pred = np.argmax(result, axis=1)
@@ -39,7 +39,6 @@ def pred_cotton(cotton):
 
 
 
-# Create flask instance
 app = Flask(__name__)
 
 
@@ -49,7 +48,6 @@ def home():
     return render_template('index.html')
 
 
-# get input image from client then predict class and render respective .html page for solution
 @app.route("/predict", methods=['GET', 'POST'])
 def predict():
     if request.method == 'POST':
